@@ -1,0 +1,14 @@
+{
+	"author": "Tim Schwab",
+	"name": "clerk",
+	"version": "0.0.1",
+	"description": "Money sterf",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/timschwab/clerk.git"
+	},
+	"bugs": {
+		"url": "https://github.com/timschwab/clerk/issues"
+	},
+	"homepage": "https://github.com/timschwab/clerk"
+}
