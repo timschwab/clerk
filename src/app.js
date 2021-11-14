@@ -1,8 +1,8 @@
 const Vue = require('vue').default;
 
-const App = require('./vue-components/App.vue').default;
-const routing = require('./vue-components/routing.js');
-const store = require('./vue-components/store.js');
+const App = require('./vue/App.vue').default;
+const routing = require('./vue/routing.js');
+const store = require('./vue/store.js');
 
 // Set up circular dependency - not sure if there is a better solution for this
 routing.setStore(store.store);
