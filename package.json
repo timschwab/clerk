@@ -2,7 +2,7 @@
 	"author": "Tim Schwab",
 	"name": "clerk",
 	"version": "0.0.1",
-	"description": "Money sterf",
+	"description": "Keeping your finances makes Clerk happy.",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/timschwab/clerk.git"

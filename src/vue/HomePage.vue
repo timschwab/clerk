@@ -8,7 +8,7 @@
 					<div class="card-body">
 						<h4>Hello!</h4>
 						<p class="card-text">
-							I am Clerk. I like doing financial tasks you humans find tiresome.
+							My name is Clerk. I like doing financial tasks you humans find tiresome.
 						</p>
 					</div>
 				</div>
@@ -30,9 +30,9 @@
 </template>
 
 <script>
-	module.exports = {
-		//
-	};
+export default {
+	//
+};
 </script>
 
 <style>

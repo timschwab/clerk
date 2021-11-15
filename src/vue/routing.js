@@ -1,14 +1,15 @@
 // Set up vue
-const Vue = require('vue').default;
-const VueRouter = require('vue-router').default;
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+import HomePage from './HomePage.vue';
+
 Vue.use(VueRouter);
 
 // Includes
 let store; // Injected by app.js
 
 // Base pages
-const HomePage = require('./HomePage.vue').default;
-
 const routing = new VueRouter({
 	mode: 'history',
 	routes: [
@@ -28,7 +29,7 @@ function setStore(storeVar) {
 	store = storeVar;
 }
 
-module.exports = {
+export default {
 	setStore,
 	routing
 };

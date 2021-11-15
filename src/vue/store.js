@@ -1,10 +1,11 @@
 // Set up vue
-const Vue = require('vue').default;
-const Vuex = require('vuex').default;
+import Vue from 'vue';
+import Vuex from 'vuex';
+import axios from 'axios';
+
 Vue.use(Vuex);
 
 // Includes
-const axios = require('axios').default;
 let routing; // Injected by app.js
 
 // Define store
@@ -32,7 +33,7 @@ function setRouting(routingVar) {
 	routing = routingVar;
 }
 
-module.exports = {
+export default {
 	setRouting,
 	store
 };

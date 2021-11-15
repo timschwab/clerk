@@ -6,9 +6,9 @@
 </template>
 
 <script>
-const Header = require('./Header.vue').default;
+import Header from './Header.vue';
 
-module.exports = {
+export default {
 	components: {
 		Header
 	}
