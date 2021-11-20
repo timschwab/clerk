@@ -5,7 +5,7 @@ const app = express();
 
 // Constants
 const dir = __dirname;
-const port = process.env.PORT || 3000;
+const port = 8357;
 
 // Static files
 app.use(express.static(path.join(dir, 'src/dist')));
