@@ -3,7 +3,8 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import HomePage from './HomePage.vue';
-import RandomFunds from './RandomFunds.vue'
+import NotFoundPage from './404.vue';
+import RandomFunds from './RandomFunds.vue';
 
 Vue.use(VueRouter);
 
@@ -21,6 +22,10 @@ const routing = new VueRouter({
 		{
 			path: '/random-funds',
 			component: RandomFunds
+		},
+		{
+			path: '*',
+			component: NotFoundPage
 		}
 	]
 });
