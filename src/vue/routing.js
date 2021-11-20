@@ -5,6 +5,7 @@ import VueRouter from 'vue-router';
 import HomePage from './HomePage.vue';
 import NotFoundPage from './404.vue';
 import RandomFunds from './RandomFunds.vue';
+import Christmas from './Christmas.vue';
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,10 @@ const routing = new VueRouter({
 		{
 			path: '/random-funds',
 			component: RandomFunds
+		},
+		{
+			path: '/christmas',
+			component: Christmas
 		},
 		{
 			path: '*',
