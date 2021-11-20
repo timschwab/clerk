@@ -3,35 +3,35 @@
 		<h1>Home</h1>
 
 		<div class="card-deck row">
-			<div class="col-lg-4">
-				<div class="card">
-					<div class="card-body">
-						<h4>Hello!</h4>
-						<p class="card-text">
-							My name is Clerk. I like doing financial tasks you humans find tiresome.
-						</p>
-					</div>
-				</div>
-			</div>
+			<HomePageCard
+				title="Hello!"
+				desc="My name is Clerk. I like doing financial tasks you humans find tiresome."
+			></HomePageCard>
 
-			<div class="col-lg-4">
-				<div class="card">
-					<div class="card-body">
-						<h4>Random Funds</h4>
-						<p class="card-text">Add or allocate your random funds.</p>
-					</div>
-					<div class="card-footer bg-white">
-						<router-link to="/random-funds" class="btn btn-primary stretched-link">Manage</router-link>
-					</div>
-				</div>
-			</div>
+			<HomePageCard
+				title="Random Funds"
+				desc="Add and allocate your random funds."
+				linkDest="/random-funds"
+				linkName="Manage"
+			></HomePageCard>
+
+			<HomePageCard
+				title="Christmas"
+				desc="Santa don't come cheap."
+				linkDest="/christmas"
+				linkName="Manage"
+			></HomePageCard>
 		</div>
 	</div>
 </template>
 
 <script>
+import HomePageCard from "./HomePageCard.vue";
+
 export default {
-	//
+	components: {
+		HomePageCard
+	}
 };
 </script>
 
