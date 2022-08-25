@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { createApp } from 'vue';
 
 import App from './vue/App.vue';
 import routing from './vue/routing.js';
@@ -8,11 +8,8 @@ import store from './vue/store/index.js';
 routing.setStore(store.store);
 store.setRouting(routing.routing);
 
-Vue.config.productionTip = false;
-
-new Vue({
-	el: '#app',
-	router: routing.routing,
-	store: store.store,
-	render: h => h(App)
-});
+// Set up the app
+const app = createApp(App);
+app.use(routing.routing);
+app.use(store.store);
+app.mount('#app');

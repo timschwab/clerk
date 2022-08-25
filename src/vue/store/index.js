@@ -1,5 +1,3 @@
-// Set up vue
-import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from 'axios';
 
@@ -7,8 +5,6 @@ import state from './state';
 import getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
-
-Vue.use(Vuex);
 
 // Includes
 let routing; // Injected by app.js
