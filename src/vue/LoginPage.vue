@@ -4,6 +4,7 @@
 		<input v-model="user" type="text" placeholder="Username" />
 		<input v-model="pass" type="password" placeholder="Password" />
 		<button @click="login">Log in</button>
+		<button @click="register">Register</button>
 	</div>
 </template>
 
@@ -21,6 +22,10 @@ export default {
 		async login() {
 			const authStore = useAuth();
 			await authStore.login(this.user, this.pass);
+		},
+		async register() {
+			const authStore = useAuth();
+			await authStore.register(this.user, this.pass);
 		}
 	}
 };

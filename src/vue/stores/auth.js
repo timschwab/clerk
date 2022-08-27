@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import auth from '../../api/auth';
 
 const state = () => {
 	let storedToken = localStorage.getItem("token");
@@ -20,9 +21,12 @@ const getters = {
 
 const actions = {
 	async login(user, pass) {
-		this.token = "thinger";
-		console.log("yay!");
-		this.router.push({ name: "home" });
+		let res = await auth.login(user, pass);
+		console.log(res);
+	},
+	async register(user, pass) {
+		let res = await auth.register(user, pass);
+		console.log(res);
 	}
 };
 
