@@ -20,13 +20,20 @@ const getters = {
 };
 
 const actions = {
-	async login(user, pass) {
-		let res = await auth.login(user, pass);
-		console.log(res);
-	},
 	async register(user, pass) {
 		let res = await auth.register(user, pass);
 		console.log(res);
+	},
+	async login(user, pass) {
+		let res = await auth.login(user, pass);
+		if (res.success) {
+			this.token = res.token;
+			this.router.push({
+				name: 'home'
+			});
+		} else {
+			console.log(res.err);
+		}
 	}
 };
 

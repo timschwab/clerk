@@ -8,15 +8,21 @@ async function login(name, pass) {
 			name,
 			pass
 		});
-		return res;
+		return {
+			success: true,
+			token: res.data.token
+		};
 	} catch (err) {
-		return err;
+		return {
+			success: false,
+			err: err
+		}
 	}
 }
 
 async function register(name, pass) {
 	try {
-		let res = await axios.post(root + "/users/create", {
+		let res = await axios.post(root + "/users/register", {
 			name,
 			pass
 		});
