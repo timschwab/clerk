@@ -1,15 +1,19 @@
-import { createApp } from 'vue';
+import { createApp, markRaw } from 'vue';
+import { createPinia } from 'pinia'
 
 import App from './vue/App.vue';
-import routing from './vue/routing.js';
-import store from './vue/store/index.js';
+import router from './vue/router.js';
 
-// Set up circular dependency - not sure if there is a better solution for this
-routing.setStore(store.store);
-store.setRouting(routing.routing);
+// Set up pinia
+const pinia = createPinia();
+pinia.use(() => {
+	return {
+		router: markRaw(router)
+	};
+});
 
-// Set up the app
+// Set up Vue
 const app = createApp(App);
-app.use(routing.routing);
-app.use(store.store);
+app.use(router);
+app.use(pinia);
 app.mount('#app');

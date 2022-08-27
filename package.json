@@ -14,10 +14,10 @@
 	"dependencies": {
 		"axios": "^0.27.2",
 		"express": "^4.17.1",
+		"pinia": "^2.0.21",
 		"uuid": "^8.3.2",
 		"vue": "^3.2.37",
-		"vue-router": "^4.1.4",
-		"vuex": "^4.0.2"
+		"vue-router": "^4.1.4"
 	},
 	"devDependencies": {
 		"lint-staged": "^13.0.3",
