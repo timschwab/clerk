@@ -28,6 +28,8 @@ const actions = {
 		let res = await auth.login(user, pass);
 		if (res.success) {
 			this.token = res.token;
+			localStorage.setItem("token", res.token);
+
 			this.router.push({
 				name: 'home'
 			});
@@ -43,10 +45,5 @@ const useStore = defineStore('main', {
 	getters,
 	actions
 });
-
-if (DEV_MODE) {
-	// Expose globally for debugging
-	window.store = useStore;
-}
 
 export default useStore;

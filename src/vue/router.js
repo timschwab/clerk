@@ -13,12 +13,14 @@ const router = createRouter({
 		{
 			path: '/',
 			name: 'home',
-			component: HomePage
+			component: HomePage,
+			meta: { auth: "required" }
 		},
 		{
 			path: '/login',
 			name: 'login',
-			component: LoginPage
+			component: LoginPage,
+			meta: { auth: "forbidden" }
 		},
 		{
 			path: '/:pathMatch(.*)*',
@@ -30,13 +32,19 @@ const router = createRouter({
 
 router.beforeEach((to, from) => {
 	const authStore = useAuth();
-	if (authStore.authenticated || to.name == 'login') {
-		return true;
-	} else {
+	console.log(from);
+
+	if (to.meta.auth == 'required' && !authStore.authenticated) {
 		return {
-			name: 'login'
+			name: "login"
+		};
+	} else if (to.meta.auth == 'forbidden' && authStore.authenticated) {
+		return {
+			name: "home"
 		};
 	}
+
+	return true;
 });
 
 if (DEV_MODE) {
