@@ -36,6 +36,13 @@ const actions = {
 		} else {
 			console.log(res.err);
 		}
+	},
+	async logout() {
+		this.token = null;
+		localStorage.removeItem("token");
+		this.router.push({
+			name: "login"
+		});
 	}
 };
 

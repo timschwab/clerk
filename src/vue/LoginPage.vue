@@ -19,13 +19,13 @@ export default {
 		};
 	},
 	methods: {
-		async login() {
+		login() {
 			const authStore = useAuth();
-			await authStore.login(this.user, this.pass);
+			authStore.login(this.user, this.pass);
 		},
-		async register() {
+		register() {
 			const authStore = useAuth();
-			await authStore.register(this.user, this.pass);
+			authStore.register(this.user, this.pass);
 		}
 	}
 };
