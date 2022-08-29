@@ -32,7 +32,24 @@ async function register(name, pass) {
 	}
 }
 
+async function validateToken(token) {
+	try {
+		await axios.post(root + "/tokens/validate", {
+			token: token
+		});
+		return {
+			success: true
+		};
+	} catch (err) {
+		return {
+			success: false,
+			err: err
+		};
+	}
+}
+
 export default {
 	login,
-	register
+	register,
+	validateToken
 };

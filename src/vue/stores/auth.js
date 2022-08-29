@@ -37,6 +37,14 @@ const actions = {
 			console.log(res.err);
 		}
 	},
+	async validateToken() {
+		if (this.token) {
+			let res = await auth.validateToken(this.token);
+			if (!res.success) {
+				await this.logout();
+			}
+		}
+	},
 	async logout() {
 		this.token = null;
 		localStorage.removeItem("token");
