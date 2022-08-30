@@ -1,4 +1,5 @@
 import axios from 'axios';
+import result from "./result"
 
 const root = "https://api.clerk.finance";
 
@@ -8,43 +9,45 @@ async function login(name, pass) {
 			name,
 			pass
 		});
-		return {
-			success: true,
-			token: res.data.token
-		};
+		return result.success(res.data.token);
 	} catch (err) {
-		return {
-			success: false,
-			err: err
+		if (err.response && err.response.status == 401) {
+			return result.failure("Incorrect username/password combination.");
+		} else {
+			console.error(err);
+			return result.failure("Something went wrong while communicating with the server.");
 		}
 	}
 }
 
 async function register(name, pass) {
 	try {
-		let res = await axios.post(root + "/users/register", {
+		await axios.post(root + "/users/register", {
 			name,
 			pass
 		});
-		return res;
+		return result.success();
 	} catch (err) {
-		return err;
+		if (err.response && err.response.status == 400) {
+			return result.failure("That username is already taken.");
+		} else {
+			console.error(err);
+			return result.failure("Something went wrong while communicating with the server.");
+		}
 	}
 }
 
-async function validateToken(token) {
+async function validateToken() {
 	try {
-		await axios.post(root + "/tokens/validate", {
-			token: token
-		});
-		return {
-			success: true
-		};
+		await axios.get(root + "/tokens/validate");
+		return result.success();
 	} catch (err) {
-		return {
-			success: false,
-			err: err
-		};
+		if (err.response && err.response.status == 401) {
+			return result.failure("Token seems to be expired.");
+		} else {
+			console.error(err);
+			return result.failure("Something went wrong while communicating with the server.");
+		}
 	}
 }
 

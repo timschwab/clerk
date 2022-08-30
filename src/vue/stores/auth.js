@@ -1,8 +1,13 @@
-import { defineStore } from 'pinia'
+import axios from 'axios';
+import { defineStore } from 'pinia';
 import auth from '../../api/auth';
+import useToast from './toast';
 
 const state = () => {
 	let storedToken = localStorage.getItem("token");
+	if (storedToken) {
+		axios.defaults.headers.common["Authorization"] = "Bearer " + storedToken;
+	}
 
 	return {
 		token: storedToken
@@ -22,19 +27,26 @@ const getters = {
 const actions = {
 	async register(user, pass) {
 		let res = await auth.register(user, pass);
-		console.log(res);
+		if (res.success) {
+			await this.login(user, pass);
+		} else {
+			const toastStore = useToast();
+			toastStore.error(res.message);
+		}
 	},
 	async login(user, pass) {
 		let res = await auth.login(user, pass);
 		if (res.success) {
-			this.token = res.token;
-			localStorage.setItem("token", res.token);
+			this.token = res.return;
+			localStorage.setItem("token", res.return);
+			axios.defaults.headers.common["Authorization"] = "Bearer " + res.return;
 
 			this.router.push({
 				name: 'home'
 			});
 		} else {
-			console.log(res.err);
+			const toastStore = useToast();
+			toastStore.error(res.message);
 		}
 	},
 	async validateToken() {
@@ -42,6 +54,8 @@ const actions = {
 			let res = await auth.validateToken(this.token);
 			if (!res.success) {
 				await this.logout();
+				const toastStore = useToast();
+				toastStore.error(res.message);
 			}
 		}
 	},
@@ -55,7 +69,7 @@ const actions = {
 };
 
 // Define store
-const useStore = defineStore('main', {
+const useStore = defineStore('auth', {
 	state,
 	getters,
 	actions
