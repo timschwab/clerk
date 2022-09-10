@@ -6,6 +6,7 @@ import HomePage from './HomePage.vue';
 import NotFoundPage from './404.vue';
 import RegisterPage from './RegisterPage.vue';
 import LoginPage from './LoginPage.vue';
+import ProfilePage from './ProfilePage.vue';
 
 // Base pages
 const router = createRouter({
@@ -28,6 +29,12 @@ const router = createRouter({
 			name: 'login',
 			component: LoginPage,
 			meta: { auth: "forbidden" }
+		},
+		{
+			path: '/profile',
+			name: 'profile',
+			component: ProfilePage,
+			meta: { auth: "required" }
 		},
 		{
 			path: '/:pathMatch(.*)*',

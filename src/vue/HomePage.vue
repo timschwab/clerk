@@ -7,6 +7,13 @@
 				title="Hello!"
 				desc="My name is Clerk. I like doing financial tasks humans find tiresome."
 			></HomePageCard>
+
+			<HomePageCard
+				title="Profile"
+				desc="Change some things around"
+				linkName="Profile"
+				linkDest="/profile"
+			></HomePageCard>
 		</div>
 	</div>
 </template>
