@@ -4,6 +4,7 @@ import useAuth from './stores/auth';
 // Includes
 import HomePage from './HomePage.vue';
 import NotFoundPage from './404.vue';
+import RegisterPage from './RegisterPage.vue';
 import LoginPage from './LoginPage.vue';
 
 // Base pages
@@ -15,6 +16,12 @@ const router = createRouter({
 			name: 'home',
 			component: HomePage,
 			meta: { auth: "required" }
+		},
+		{
+			path: '/register',
+			name: 'register',
+			component: RegisterPage,
+			meta: { auth: "forbidden" }
 		},
 		{
 			path: '/login',

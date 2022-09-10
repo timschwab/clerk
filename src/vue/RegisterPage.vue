@@ -1,11 +1,11 @@
 <template>
 	<div>
-		<h1>Log in yo</h1>
+		<h1>Henlo</h1>
 		<input v-model="user" type="text" placeholder="Username" />
 		<input v-model="pass" type="password" placeholder="Password" />
-		<button @click="login">Log in</button>
+		<button @click="register">Register</button>
 		<br />
-		<router-link to="/register">Register</router-link>
+		<router-link to="/login">Log in</router-link>
 	</div>
 </template>
 
@@ -20,9 +20,9 @@ export default {
 		};
 	},
 	methods: {
-		login() {
+		register() {
 			const authStore = useAuth();
-			authStore.login(this.user, this.pass);
+			authStore.register(this.user, this.pass);
 		}
 	}
 };
