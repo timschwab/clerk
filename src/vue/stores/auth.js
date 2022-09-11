@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { defineStore } from 'pinia';
-import auth from '../../api/auth';
+import user from '../../api/user';
+import token from '../../api/token';
 import useToast from './toast';
 
 const state = () => {
@@ -25,17 +26,17 @@ const getters = {
 };
 
 const actions = {
-	async register(user, pass) {
-		let res = await auth.register(user, pass);
+	async register(username, password) {
+		let res = await user.register(username, password);
 		if (res.success) {
-			await this.login(user, pass);
+			await this.login(username, password);
 		} else {
 			const toastStore = useToast();
 			toastStore.error(res.message);
 		}
 	},
-	async login(user, pass) {
-		let res = await auth.login(user, pass);
+	async login(username, password) {
+		let res = await user.login(username, password);
 		if (res.success) {
 			this.token = res.return;
 			localStorage.setItem("token", res.return);
@@ -51,7 +52,7 @@ const actions = {
 	},
 	async validateToken() {
 		if (this.token) {
-			let res = await auth.validateToken(this.token);
+			let res = await token.validate(this.token);
 			if (!res.success) {
 				await this.logout();
 				const toastStore = useToast();

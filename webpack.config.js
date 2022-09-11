@@ -24,7 +24,7 @@ let config = {
 };
 
 module.exports = (env, argv) => {
-	let defineSettings = {};
+	let defineSettings;
 
 	if (argv.mode == 'development') {
 		defineSettings = {
@@ -39,6 +39,9 @@ module.exports = (env, argv) => {
 	} else {
 		// Shouldn't get here
 	}
+
+	defineSettings.__VUE_OPTIONS_API__ = JSON.stringify(true);
+	defineSettings.__VUE_PROD_DEVTOOLS__ = JSON.stringify(false);
 
 	config.plugins.push(new webpack.DefinePlugin(defineSettings));
 

@@ -1,11 +1,9 @@
 import axios from 'axios';
 import result from "./result"
 
-const root = "https://api.clerk.finance";
-
 async function login(name, pass) {
 	try {
-		let res = await axios.post(root + "/users/login", {
+		let res = await axios.post("/users/login", {
 			name,
 			pass
 		});
@@ -22,7 +20,7 @@ async function login(name, pass) {
 
 async function register(name, pass) {
 	try {
-		await axios.post(root + "/users/register", {
+		await axios.post("/users/register", {
 			name,
 			pass
 		});
@@ -37,13 +35,13 @@ async function register(name, pass) {
 	}
 }
 
-async function validateToken() {
+async function info() {
 	try {
-		await axios.get(root + "/tokens/validate");
-		return result.success();
+		let info = await axios.get("/users/info");
+		return result.success(info.data);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
-			return result.failure("Token seems to be expired.");
+			return result.failure("Could not authenticate with the server.");
 		} else {
 			console.error(err);
 			return result.failure("Something went wrong while communicating with the server.");
@@ -54,5 +52,5 @@ async function validateToken() {
 export default {
 	login,
 	register,
-	validateToken
+	info
 };
