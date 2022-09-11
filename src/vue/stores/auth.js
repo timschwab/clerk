@@ -63,6 +63,7 @@ const actions = {
 	async logout() {
 		this.token = null;
 		localStorage.removeItem("token");
+		axios.defaults.headers.common["Authorization"] = undefined;
 		this.router.push({
 			name: "login"
 		});

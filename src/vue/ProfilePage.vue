@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<h1>o hi, it you</h1>
+		<h1>oh hi, it you</h1>
 		<p>Your permanent ID: {{ info.id }}</p>
 		<p>Your username: {{ info.username }}</p>
 		<hr />
