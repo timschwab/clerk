@@ -49,8 +49,20 @@ async function info() {
 	}
 }
 
+async function changeUsername(newUsername) {
+	console.log(newUsername);
+	return result.failure("Not implemented yet");
+}
+
+async function changePassword(newPassword) {
+	console.log(newPassword);
+	return result.failure("Not implemented yet");
+}
+
 export default {
 	login,
 	register,
-	info
+	info,
+	changeUsername,
+	changePassword
 };
