@@ -10,9 +10,14 @@
 
 			<HomePageCard
 				title="Profile"
-				desc="Change some things around"
-				linkName="Profile"
+				desc="Who you are"
+				linkName="Manage"
 				linkDest="/profile"
+			></HomePageCard>
+
+			<HomePageCard
+				title="Groups"
+				desc="Coming soon..."
 			></HomePageCard>
 		</div>
 	</div>
