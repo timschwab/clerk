@@ -17,7 +17,9 @@
 
 			<HomePageCard
 				title="Groups"
-				desc="Coming soon..."
+				desc="Where the magic happens"
+				linkName="Manage"
+				linkDest="/groups"
 			></HomePageCard>
 		</div>
 	</div>
@@ -28,10 +30,9 @@ import HomePageCard from "./HomePageCard.vue";
 
 export default {
 	components: {
-		HomePageCard
-	}
+		HomePageCard,
+	},
 };
 </script>
 
-<style>
-</style>
+<style></style>

@@ -1,59 +1,66 @@
-import { createRouter, createWebHistory } from 'vue-router';
-import useAuth from './stores/auth';
+import { createRouter, createWebHistory } from "vue-router";
+import useAuth from "./stores/auth";
 
 // Includes
-import HomePage from './HomePage.vue';
-import NotFoundPage from './404.vue';
-import RegisterPage from './RegisterPage.vue';
-import LoginPage from './LoginPage.vue';
-import ProfilePage from './ProfilePage.vue';
+import HomePage from "./HomePage.vue";
+import NotFoundPage from "./404.vue";
+import RegisterPage from "./RegisterPage.vue";
+import LoginPage from "./LoginPage.vue";
+import ProfilePage from "./ProfilePage.vue";
+import GroupsPage from "./GroupsPage.vue";
 
 // Base pages
 const router = createRouter({
 	history: createWebHistory(),
 	routes: [
 		{
-			path: '/',
-			name: 'home',
+			path: "/",
+			name: "home",
 			component: HomePage,
-			meta: { auth: "required" }
+			meta: { auth: "required" },
 		},
 		{
-			path: '/register',
-			name: 'register',
+			path: "/register",
+			name: "register",
 			component: RegisterPage,
-			meta: { auth: "forbidden" }
+			meta: { auth: "forbidden" },
 		},
 		{
-			path: '/login',
-			name: 'login',
+			path: "/login",
+			name: "login",
 			component: LoginPage,
-			meta: { auth: "forbidden" }
+			meta: { auth: "forbidden" },
 		},
 		{
-			path: '/profile',
-			name: 'profile',
+			path: "/profile",
+			name: "profile",
 			component: ProfilePage,
-			meta: { auth: "required" }
+			meta: { auth: "required" },
 		},
 		{
-			path: '/:pathMatch(.*)*',
-			name: '404',
-			component: NotFoundPage
-		}
-	]
+			path: "/groups",
+			name: "groups",
+			component: GroupsPage,
+			meta: { auth: "required" },
+		},
+		{
+			path: "/:pathMatch(.*)*",
+			name: "404",
+			component: NotFoundPage,
+		},
+	],
 });
 
 router.beforeEach((to, from) => {
 	const authStore = useAuth();
 
-	if (to.meta.auth == 'required' && !authStore.authenticated) {
+	if (to.meta.auth == "required" && !authStore.authenticated) {
 		return {
-			name: "login"
+			name: "login",
 		};
-	} else if (to.meta.auth == 'forbidden' && authStore.authenticated) {
+	} else if (to.meta.auth == "forbidden" && authStore.authenticated) {
 		return {
-			name: "home"
+			name: "home",
 		};
 	}
 
