@@ -1,9 +1,9 @@
-import axios from 'axios';
-import { createApp, markRaw } from 'vue';
-import { createPinia } from 'pinia'
+import axios from "axios";
+import {createApp, markRaw} from "vue";
+import {createPinia} from "pinia";
 
-import App from './vue/App.vue';
-import router from './vue/router.js';
+import App from "./vue/App.vue";
+import router from "./vue/router.js";
 
 // Set up Axios
 axios.defaults.baseURL = "https://api.clerk.finance";
@@ -12,7 +12,7 @@ axios.defaults.baseURL = "https://api.clerk.finance";
 const pinia = createPinia();
 pinia.use(() => {
 	return {
-		router: markRaw(router)
+		router: markRaw(router),
 	};
 });
 
@@ -20,5 +20,4 @@ pinia.use(() => {
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
-app.mount('#app');
-
+app.mount("#app");
