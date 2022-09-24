@@ -13,16 +13,16 @@
 </template>
 
 <script>
-// import useAuth from './stores/auth';
 import user from "../api/user";
-import useToast from './stores/toast';
+import useToast from "./stores/toast";
 
 export default {
 	data() {
 		return {
 			info: {},
 			newUsername: undefined,
-			newPassword: undefined
+			newPassword: undefined,
+			toastStore: undefined,
 		};
 	},
 	created() {
@@ -55,10 +55,9 @@ export default {
 			} else {
 				this.toastStore.error(result.message);
 			}
-		}
-	}
+		},
+	},
 };
 </script>
 
-<style>
-</style>
+<style></style>
