@@ -19,7 +19,7 @@
 				title="Groups"
 				desc="Where the magic happens"
 				linkName="Manage"
-				linkDest="/groups"
+				linkDest="/my-groups"
 			></HomePageCard>
 		</div>
 	</div>

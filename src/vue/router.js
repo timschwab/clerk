@@ -7,7 +7,7 @@ import NotFoundPage from "./404.vue";
 import RegisterPage from "./RegisterPage.vue";
 import LoginPage from "./LoginPage.vue";
 import ProfilePage from "./ProfilePage.vue";
-import GroupsPage from "./GroupsPage.vue";
+import MyGroupsPage from "./MyGroupsPage.vue";
 
 // Base pages
 const router = createRouter({
@@ -38,9 +38,9 @@ const router = createRouter({
 			meta: { auth: "required" },
 		},
 		{
-			path: "/groups",
+			path: "/my-groups",
 			name: "groups",
-			component: GroupsPage,
+			component: MyGroupsPage,
 			meta: { auth: "required" },
 		},
 		{

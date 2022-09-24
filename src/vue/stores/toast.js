@@ -1,26 +1,26 @@
 import { v4 as uuid } from "uuid";
 import { defineStore } from "pinia";
 
-const secondsToShow = 10;
+const secondsToShow = 5;
 
 const state = () => {
 	return {
 		start: 0,
 		end: 0,
-		data: {}
+		data: {},
 	};
-}
+};
 
 const getters = {
 	list(state) {
 		let result = [];
 
-		for (let i = state.start ; i < state.end ; i++) {
+		for (let i = state.start; i < state.end; i++) {
 			result.push(state.data[i]);
 		}
 
 		return result;
-	}
+	},
 };
 
 const actions = {
@@ -31,7 +31,7 @@ const actions = {
 
 		setTimeout(() => {
 			this.remove();
-		}, secondsToShow*1000);
+		}, secondsToShow * 1000);
 	},
 	remove() {
 		let prev = this.start;
@@ -48,30 +48,30 @@ const actions = {
 		this.add({
 			id: uuid(),
 			type: "info",
-			message: message
+			message: message,
 		});
 	},
 	warning(message) {
 		this.add({
 			id: uuid(),
 			type: "warning",
-			message: message
+			message: message,
 		});
 	},
 	error(message) {
 		this.add({
 			id: uuid(),
 			type: "error",
-			message: message
+			message: message,
 		});
-	}
+	},
 };
 
 // Define store
-const useStore = defineStore('toast', {
+const useStore = defineStore("toast", {
 	state,
 	getters,
-	actions
+	actions,
 });
 
 export default useStore;

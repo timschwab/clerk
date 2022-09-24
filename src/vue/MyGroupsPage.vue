@@ -2,6 +2,7 @@
 	<div>
 		<h1>It's your groups</h1>
 		<p>You have {{ groups.length }} groups.</p>
+		<button @click="createGroup">Create a new group</button>
 	</div>
 </template>
 
@@ -26,6 +27,14 @@ export default {
 				this.groups = groups.return;
 			} else {
 				this.toastStore.error(groups.message);
+			}
+		},
+		async createGroup() {
+			let group = await groupApi.create();
+			if (group.success) {
+				await this.fetchGroups();
+			} else {
+				this.toastStore.error(group.message);
 			}
 		},
 	},
