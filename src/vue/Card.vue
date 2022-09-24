@@ -6,7 +6,9 @@
 				<p class="card-text">{{ desc }}</p>
 			</div>
 			<div class="card-footer" v-if="linkDest">
-				<router-link :to="linkDest" class="btn btn-primary stretched-link">{{ linkName }}</router-link>
+				<router-link :to="linkDest" class="btn btn-primary stretched-link">{{
+					linkName
+				}}</router-link>
 			</div>
 		</div>
 	</div>
@@ -14,9 +16,8 @@
 
 <script>
 export default {
-	props: ['title', 'desc', 'linkDest', 'linkName']
-}
+	props: ["title", "desc", "linkDest", "linkName"],
+};
 </script>
 
-<style>
-</style>
+<style></style>

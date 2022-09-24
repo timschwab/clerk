@@ -3,34 +3,34 @@
 		<h1>Home</h1>
 
 		<div class="card-deck row">
-			<HomePageCard
+			<Card
 				title="Hello!"
 				desc="My name is Clerk. I like doing financial tasks humans find tiresome."
-			></HomePageCard>
+			></Card>
 
-			<HomePageCard
+			<Card
 				title="Profile"
 				desc="Who you are"
 				linkName="Manage"
 				linkDest="/profile"
-			></HomePageCard>
+			></Card>
 
-			<HomePageCard
+			<Card
 				title="Groups"
 				desc="Where the magic happens"
 				linkName="Manage"
 				linkDest="/my-groups"
-			></HomePageCard>
+			></Card>
 		</div>
 	</div>
 </template>
 
 <script>
-import HomePageCard from "./HomePageCard.vue";
+import Card from "./Card.vue";
 
 export default {
 	components: {
-		HomePageCard,
+		Card,
 	},
 };
 </script>
