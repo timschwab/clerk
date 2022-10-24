@@ -29,7 +29,7 @@
 		"webpack-cli": "^4.9.1"
 	},
 	"scripts": {
-		"postinstall": "git config core.hooksPath git-hooks"
+		"prepare": "git config core.hooksPath git-hooks"
 	},
 	"lint-staged": {
 		"*.{js,json,css,html,vue}": "prettier --write"
