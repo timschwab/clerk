@@ -78,9 +78,30 @@ async function changeName(group, newName) {
 	}
 }
 
+async function deleteGroup(group) {
+	try {
+		await axios.delete("/groups/" + group);
+		return result.success();
+	} catch (err) {
+		if (err.response && err.response.status == 401) {
+			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have access to this group, or it doesn't exist."
+			);
+		} else {
+			console.error(err);
+			return result.failure(
+				"Something went wrong while communicating with the server."
+			);
+		}
+	}
+}
+
 export default {
 	myGroups,
 	create,
 	getGroup,
-	changeName
+	changeName,
+	deleteGroup
 };

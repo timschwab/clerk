@@ -74,7 +74,15 @@ export default {
 			}
 		},
 		async deleteGroup() {
-			console.log("Deleting group");
+			let result = await groupApi.deleteGroup(this.group);
+
+			if (result.success) {
+				this.$router.push({
+					name: "groups"
+				});
+			} else {
+				this.toastStore.error(result.message);
+			}
 		}
 	}
 };
