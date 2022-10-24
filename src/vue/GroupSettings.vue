@@ -64,7 +64,14 @@ export default {
 			this.loaded = true;
 		},
 		async changeName() {
-			console.log("Changing to " + this.newName);
+			let result = await groupApi.changeName(this.newName);
+
+			if (result.success) {
+				this.data.name = this.newName;
+				this.newName = "";
+			} else {
+				this.toastStore.error(result.message);
+			}
 		},
 		async deleteGroup() {
 			console.log("Deleting group");

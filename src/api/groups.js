@@ -40,6 +40,35 @@ async function getGroup(group) {
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
 			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have access to this group, or it doesn't exist."
+			);
+		} else {
+			console.error(err);
+			return result.failure(
+				"Something went wrong while communicating with the server."
+			);
+		}
+	}
+}
+
+async function changeName(group, newName) {
+	try {
+		let endpoint = "/groups/" + group + "/name";
+		let body = {
+			newName
+		};
+
+		await axios.post(endpoint, body);
+		return result.success();
+	} catch (err) {
+		if (err.response && err.response.status == 401) {
+			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have access to this group, or it doesn't exist."
+			);
 		} else {
 			console.error(err);
 			return result.failure(
@@ -52,5 +81,6 @@ async function getGroup(group) {
 export default {
 	myGroups,
 	create,
-	getGroup
+	getGroup,
+	changeName
 };
