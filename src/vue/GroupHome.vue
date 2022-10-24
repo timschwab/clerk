@@ -3,6 +3,7 @@
 		<router-link to="/my-groups">Back to groups</router-link>
 		<div v-if="loaded">
 			<h1>{{ data.name }}</h1>
+			<p>Your role: {{ data.role }}</p>
 		</div>
 		<div v-else>
 			<p>Loading...</p>
@@ -20,12 +21,21 @@ export default {
 		return {
 			loaded: false,
 			data: undefined,
-			toastStore: null,
+			toastStore: null
 		};
 	},
 	created() {
 		this.toastStore = useToast();
 		this.fetchGroup();
+	},
+	computed: {
+		admin() {
+			if (this.loaded) {
+				return this.data.role == "admin";
+			} else {
+				return false;
+			}
+		}
 	},
 	methods: {
 		async fetchGroup() {
@@ -38,8 +48,8 @@ export default {
 			}
 
 			this.loaded = true;
-		},
-	},
+		}
+	}
 };
 </script>
 

@@ -35,7 +35,7 @@ async function create() {
 
 async function getGroup(group) {
 	try {
-		let groupData = await axios.get("/groups/" + group + "/data");
+		let groupData = await axios.get("/groups/" + group + "/info");
 		return result.success(groupData.data.group);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
@@ -52,5 +52,5 @@ async function getGroup(group) {
 export default {
 	myGroups,
 	create,
-	getGroup,
+	getGroup
 };
