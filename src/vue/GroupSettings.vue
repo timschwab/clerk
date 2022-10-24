@@ -74,6 +74,10 @@ export default {
 			}
 		},
 		async deleteGroup() {
+			if (!confirm("Are you sure? This is an unrecoverable action.")) {
+				return;
+			}
+
 			let result = await groupApi.deleteGroup(this.group);
 
 			if (result.success) {
