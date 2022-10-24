@@ -64,7 +64,7 @@ export default {
 			this.loaded = true;
 		},
 		async changeName() {
-			let result = await groupApi.changeName(this.newName);
+			let result = await groupApi.changeName(this.group, this.newName);
 
 			if (result.success) {
 				this.data.name = this.newName;
