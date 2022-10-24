@@ -24,8 +24,8 @@
 </template>
 
 <script>
-import groupApi from "../api/groups";
 import useToast from "./stores/toast";
+import groupApi from "../api/groups";
 import Card from "./Card.vue";
 
 export default {
@@ -35,6 +35,7 @@ export default {
 	data() {
 		return {
 			groups: [],
+			toastStore: null,
 		};
 	},
 	created() {

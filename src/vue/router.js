@@ -4,10 +4,13 @@ import useAuth from "./stores/auth";
 // Includes
 import HomePage from "./HomePage.vue";
 import NotFoundPage from "./404.vue";
+
 import RegisterPage from "./RegisterPage.vue";
 import LoginPage from "./LoginPage.vue";
 import ProfilePage from "./ProfilePage.vue";
+
 import MyGroupsPage from "./MyGroupsPage.vue";
+import GroupHome from "./GroupHome.vue";
 
 // Base pages
 const router = createRouter({
@@ -41,6 +44,13 @@ const router = createRouter({
 			path: "/my-groups",
 			name: "groups",
 			component: MyGroupsPage,
+			meta: { auth: "required" },
+		},
+		{
+			path: "/group/:group",
+			name: "groupHome",
+			component: GroupHome,
+			props: true,
 			meta: { auth: "required" },
 		},
 		{
