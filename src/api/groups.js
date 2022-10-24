@@ -33,7 +33,24 @@ async function create() {
 	}
 }
 
+async function getGroup(group) {
+	try {
+		let groupData = await axios.get("/groups/" + group + "/data");
+		return result.success(groupData.data.group);
+	} catch (err) {
+		if (err.response && err.response.status == 401) {
+			return result.failure("Could not authenticate with the server.");
+		} else {
+			console.error(err);
+			return result.failure(
+				"Something went wrong while communicating with the server."
+			);
+		}
+	}
+}
+
 export default {
 	myGroups,
 	create,
+	getGroup,
 };
