@@ -11,6 +11,7 @@ import ProfilePage from "./ProfilePage.vue";
 
 import MyGroupsPage from "./MyGroupsPage.vue";
 import GroupHome from "./GroupHome.vue";
+import GroupSettings from "./GroupSettings.vue";
 
 // Base pages
 const router = createRouter({
@@ -20,45 +21,52 @@ const router = createRouter({
 			path: "/",
 			name: "home",
 			component: HomePage,
-			meta: { auth: "required" },
+			meta: { auth: "required" }
 		},
 		{
 			path: "/register",
 			name: "register",
 			component: RegisterPage,
-			meta: { auth: "forbidden" },
+			meta: { auth: "forbidden" }
 		},
 		{
 			path: "/login",
 			name: "login",
 			component: LoginPage,
-			meta: { auth: "forbidden" },
+			meta: { auth: "forbidden" }
 		},
 		{
 			path: "/profile",
 			name: "profile",
 			component: ProfilePage,
-			meta: { auth: "required" },
+			meta: { auth: "required" }
 		},
 		{
 			path: "/my-groups",
 			name: "groups",
 			component: MyGroupsPage,
-			meta: { auth: "required" },
+			meta: { auth: "required" }
 		},
 		{
 			path: "/group/:group",
 			name: "groupHome",
 			component: GroupHome,
 			props: true,
-			meta: { auth: "required" },
+			meta: { auth: "required" }
+		},
+		{
+			path: "/group/:group/settings",
+			name: "groupSettings",
+			component: GroupSettings,
+			props: true,
+			meta: { auth: "required" }
 		},
 		{
 			path: "/:pathMatch(.*)*",
 			name: "404",
-			component: NotFoundPage,
-		},
-	],
+			component: NotFoundPage
+		}
+	]
 });
 
 router.beforeEach((to, from) => {
@@ -66,11 +74,11 @@ router.beforeEach((to, from) => {
 
 	if (to.meta.auth == "required" && !authStore.authenticated) {
 		return {
-			name: "login",
+			name: "login"
 		};
 	} else if (to.meta.auth == "forbidden" && authStore.authenticated) {
 		return {
-			name: "home",
+			name: "home"
 		};
 	}
 

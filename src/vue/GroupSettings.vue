@@ -1,13 +1,19 @@
 <template>
 	<div>
-		<router-link to="/my-groups">Back to groups</router-link>
+		<router-link :to="homeLink">Back to group</router-link>
 
 		<div v-if="loaded">
 			<h1>{{ data.name }}</h1>
 			<p>Your role: {{ data.role }}</p>
-			<p v-if="admin">
-				<router-link :to="settingsLink">Group settings</router-link>
-			</p>
+			<div v-if="admin">
+				<p>
+					<input v-model="newName" type="text" placeholder="New group name" />
+					<button @click="changeName">Change group name</button>
+				</p>
+				<p>
+					<button @click="deleteGroup">Delete group</button>
+				</p>
+			</div>
 		</div>
 		<div v-else>
 			<p>Loading...</p>
@@ -25,7 +31,8 @@ export default {
 		return {
 			loaded: false,
 			data: undefined,
-			toastStore: null
+			toastStore: null,
+			newName: ""
 		};
 	},
 	created() {
@@ -40,8 +47,8 @@ export default {
 				return false;
 			}
 		},
-		settingsLink() {
-			return "/group/" + this.group + "/settings";
+		homeLink() {
+			return "/group/" + this.group;
 		}
 	},
 	methods: {
@@ -55,6 +62,12 @@ export default {
 			}
 
 			this.loaded = true;
+		},
+		async changeName() {
+			console.log("Changing to " + this.newName);
+		},
+		async deleteGroup() {
+			console.log("Deleting group");
 		}
 	}
 };
