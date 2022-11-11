@@ -3,8 +3,8 @@ import result from "./result";
 
 async function fromGroup(group) {
 	try {
-		// let groups = await axios.get("/groups/my");
-		return result.success();
+		let budget = await axios.get("/budget/fromGroup/" + group);
+		return result.success(budget);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
 			return result.failure("Could not authenticate with the server.");
