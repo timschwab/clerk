@@ -4,9 +4,21 @@
 
 		<div v-if="loaded">
 			<h1>{{ data.name }}</h1>
-			<p>Your role: {{ data.role }}</p>
-			<p v-if="admin">
-				<router-link :to="settingsLink">Group settings</router-link>
+
+			<div class="card-deck row">
+				<Card
+					title="Budget"
+					desc="Revenue, expenses, savings"
+					linkName="Set"
+					:linkDest="budgetLink"
+				></Card>
+			</div>
+
+			<p>
+				Your role: {{ data.role }}
+				<span v-if="admin">
+					| <router-link :to="settingsLink">Group settings</router-link>
+				</span>
 			</p>
 		</div>
 		<div v-else>
@@ -17,9 +29,13 @@
 
 <script>
 import useToast from "./stores/toast";
-import groupApi from "../api/groups";
+import groupApi from "../api/group";
+import Card from "./Card.vue";
 
 export default {
+	components: {
+		Card
+	},
 	props: ["group"],
 	data() {
 		return {
@@ -42,6 +58,9 @@ export default {
 		},
 		settingsLink() {
 			return "/group/" + this.group + "/settings";
+		},
+		budgetLink() {
+			return "/group/" + this.group + "/budget";
 		}
 	},
 	methods: {

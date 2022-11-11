@@ -25,17 +25,17 @@
 
 <script>
 import useToast from "./stores/toast";
-import groupApi from "../api/groups";
+import groupApi from "../api/group";
 import Card from "./Card.vue";
 
 export default {
 	components: {
-		Card,
+		Card
 	},
 	data() {
 		return {
 			groups: [],
-			toastStore: null,
+			toastStore: null
 		};
 	},
 	created() {
@@ -50,7 +50,7 @@ export default {
 					title: group.name,
 					desc: group.id,
 					linkName: "View",
-					linkDest: "/group/" + group.id,
+					linkDest: "/group/" + group.id
 				};
 			});
 
@@ -63,7 +63,7 @@ export default {
 				if (rem == 0) {
 					bucketed.push({
 						id: index,
-						groups: [],
+						groups: []
 					});
 				}
 
@@ -72,7 +72,7 @@ export default {
 			}
 
 			return bucketed;
-		},
+		}
 	},
 	methods: {
 		async fetchGroups() {
@@ -90,8 +90,8 @@ export default {
 			} else {
 				this.toastStore.error(group.message);
 			}
-		},
-	},
+		}
+	}
 };
 </script>
 

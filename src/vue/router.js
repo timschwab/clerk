@@ -12,6 +12,7 @@ import ProfilePage from "./ProfilePage.vue";
 import MyGroupsPage from "./MyGroupsPage.vue";
 import GroupHome from "./GroupHome.vue";
 import GroupSettings from "./GroupSettings.vue";
+import GroupBudget from "./GroupBudget.vue";
 
 // Base pages
 const router = createRouter({
@@ -58,6 +59,13 @@ const router = createRouter({
 			path: "/group/:group/settings",
 			name: "groupSettings",
 			component: GroupSettings,
+			props: true,
+			meta: { auth: "required" }
+		},
+		{
+			path: "/group/:group/budget",
+			name: "groupBudget",
+			component: GroupBudget,
 			props: true,
 			meta: { auth: "required" }
 		},

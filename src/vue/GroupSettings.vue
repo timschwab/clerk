@@ -23,7 +23,7 @@
 
 <script>
 import useToast from "./stores/toast";
-import groupApi from "../api/groups";
+import groupApi from "../api/group";
 
 export default {
 	props: ["group"],
