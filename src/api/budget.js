@@ -4,7 +4,7 @@ import result from "./result";
 async function fromGroup(group) {
 	try {
 		let budget = await axios.get("/budget/fromGroup/" + group);
-		return result.success(budget.id);
+		return result.success(budget.data.id);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
 			return result.failure("Could not authenticate with the server.");
@@ -26,7 +26,7 @@ async function fromGroup(group) {
 async function create(group) {
 	try {
 		let budget = await axios.post("/budget/create/" + group);
-		return result.success(budget.id);
+		return result.success(budget.data.id);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
 			return result.failure("Could not authenticate with the server.");
