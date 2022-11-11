@@ -4,10 +4,38 @@ import result from "./result";
 async function fromGroup(group) {
 	try {
 		let budget = await axios.get("/budget/fromGroup/" + group);
-		return result.success(budget.budget);
+		return result.success(budget.id);
 	} catch (err) {
 		if (err.response && err.response.status == 401) {
 			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have authorization to do that, FRIEND."
+			);
+		} else if (err.response && err.response.status == 404) {
+			return result.failure("That endpoint doesn't exist, my dude.");
+		} else {
+			console.error(err);
+			return result.failure(
+				"Something went wrong while communicating with the server."
+			);
+		}
+	}
+}
+
+async function create(group) {
+	try {
+		let budget = await axios.post("/budget/create/" + group);
+		return result.success(budget.id);
+	} catch (err) {
+		if (err.response && err.response.status == 401) {
+			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have authorization to do that, FRIEND."
+			);
+		} else if (err.response && err.response.status == 404) {
+			return result.failure("That endpoint doesn't exist, my dude.");
 		} else {
 			console.error(err);
 			return result.failure(
@@ -18,5 +46,6 @@ async function fromGroup(group) {
 }
 
 export default {
-	fromGroup
+	fromGroup,
+	create
 };

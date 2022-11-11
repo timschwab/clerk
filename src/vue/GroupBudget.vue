@@ -25,17 +25,20 @@
 </template>
 
 <script>
+import useToast from "./stores/toast";
 import budgetApi from "../api/budget";
 
 export default {
 	props: ["group"],
 	data() {
 		return {
+			toastStore: null,
 			loaded: false,
 			successful: undefined
 		};
 	},
 	created() {
+		this.toastStore = useToast();
 		this.fetchBudget();
 	},
 	computed: {
@@ -48,16 +51,11 @@ export default {
 			let budget = await budgetApi.fromGroup(this.group);
 
 			if (budget.success) {
-				this.successful = true;
 				if (budget.return) {
-					this.$router.push({
-						name: "budgetHome",
-						params: {
-							budget: budget.return
-						}
-					});
+					this.gotoBudget(budget.return);
 				} else {
 					// Stay on the page and have the user create a budget
+					this.successful = true;
 				}
 			} else {
 				this.successful = false;
@@ -66,7 +64,21 @@ export default {
 			this.loaded = true;
 		},
 		async create() {
-			//
+			let budget = await budgetApi.create(this.group);
+
+			if (budget.success) {
+				this.gotoBudget(budget.return);
+			} else {
+				this.toastStore.error(budget.message);
+			}
+		},
+		gotoBudget(budget) {
+			this.$router.push({
+				name: "budgetHome",
+				params: {
+					budget: budget
+				}
+			});
 		}
 	}
 };

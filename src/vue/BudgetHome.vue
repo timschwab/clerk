@@ -31,19 +31,12 @@ export default {
 	},
 	computed: {
 		homeLink() {
-			return "/group/";
+			return "/group/whoops";
 		}
 	},
 	methods: {
 		async fetchBudget() {
-			/*let groupData = await groupApi.getGroup(this.group);
-
-			if (groupData.success) {
-				this.data = groupData.return;
-			} else {
-				this.toastStore.error(groupData.message);
-			}*/
-
+			// Nothin yet
 			this.loaded = true;
 		}
 	}
