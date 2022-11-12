@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<router-link :to="homeLink">Back to group</router-link>
-
 		<div v-if="loaded">
+			<router-link :to="homeLink">Back to group</router-link>
+
 			<h1>Yo</h1>
 			<p>{{ budget }}</p>
 		</div>
@@ -31,12 +31,19 @@ export default {
 	},
 	computed: {
 		homeLink() {
-			return "/group/whoops";
+			return "/group/" + this.data.group;
 		}
 	},
 	methods: {
 		async fetchBudget() {
-			// Nothin yet
+			let budgetData = await budgetApi.info(this.budget);
+
+			if (budgetData.success) {
+				this.data = budgetData.return;
+			} else {
+				this.toastStore.error(budgetData.message);
+			}
+
 			this.loaded = true;
 		}
 	}
