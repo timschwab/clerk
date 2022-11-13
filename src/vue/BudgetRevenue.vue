@@ -20,6 +20,10 @@
 						/>
 						<button @click="add">Add new source of revenue</button>
 					</p>
+
+					<p v-for="source in rearranged" :key="source.name">
+						{{ source.name }}: {{ source.amount }}
+					</p>
 				</div>
 				<div class="col-lg-6">
 					<h2>Stats</h2>
@@ -65,10 +69,7 @@ export default {
 			return "/budget/" + this.budget;
 		},
 		totals() {
-			let monthly = Object.values(this.data).reduce(
-				(acc, cur) => acc + cur.amount,
-				0
-			);
+			let monthly = Object.values(this.data).reduce((acc, cur) => acc + cur, 0);
 			let yearly = monthly * 12;
 			let daily = yearly / 365;
 			let weekly = daily * 7;
@@ -79,6 +80,17 @@ export default {
 				daily: utils.numToDollar(daily),
 				weekly: utils.numToDollar(weekly)
 			};
+		},
+		rearranged() {
+			let entries = Object.entries(this.data);
+			let mapped = entries.map((entry) => {
+				return {
+					name: entry[0],
+					amount: utils.numToDollar(entry[1])
+				};
+			});
+
+			return mapped;
 		}
 	},
 	methods: {
@@ -93,7 +105,7 @@ export default {
 
 			this.loaded = true;
 		},
-		add() {
+		async add() {
 			let name = this.forms.name;
 			let amount = Number(this.forms.amount);
 
@@ -123,13 +135,13 @@ export default {
 				return;
 			}
 
-			this.data[name] = {
-				name,
-				amount
-			};
+			this.data[name] = amount;
 
 			this.forms.name = null;
 			this.forms.amount = null;
+		},
+		async save() {
+			// TODO: send to server and store it
 		}
 	}
 };
