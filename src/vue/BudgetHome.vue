@@ -1,10 +1,10 @@
 <template>
 	<div>
 		<div v-if="loaded">
-			<router-link :to="homeLink">Back to group</router-link>
+			<router-link :to="backLink">Back to group</router-link>
 
-			<h1>Yo</h1>
-			<p>{{ budget }}</p>
+			<h1>Budget</h1>
+			<p><router-link :to="revenueLink">Revenue</router-link></p>
 		</div>
 		<div v-else>
 			<p>Loading...</p>
@@ -30,8 +30,11 @@ export default {
 		this.fetchBudget();
 	},
 	computed: {
-		homeLink() {
+		backLink() {
 			return "/group/" + this.data.group;
+		},
+		revenueLink() {
+			return "/budget/" + this.budget + "/revenue";
 		}
 	},
 	methods: {

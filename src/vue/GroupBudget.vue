@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<router-link :to="homeLink">Back to group</router-link>
+		<router-link :to="backLink">Back to group</router-link>
 
 		<div v-if="loaded">
 			<div v-if="successful">
@@ -42,7 +42,7 @@ export default {
 		this.fetchBudget();
 	},
 	computed: {
-		homeLink() {
+		backLink() {
 			return "/group/" + this.group;
 		}
 	},
