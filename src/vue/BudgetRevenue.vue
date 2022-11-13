@@ -3,10 +3,23 @@
 		<router-link :to="backLink">Back to budget</router-link>
 
 		<div v-if="loaded">
-			<h1>Budget Revenue</h1>
+			<h1>Monthly Revenue</h1>
 			<div class="row">
 				<div class="col-lg-6">
-					<h2>Monthly Sources of Revenue</h2>
+					<h2>Sources of Revenue</h2>
+					<p>
+						<input
+							v-model="forms.name"
+							type="text"
+							placeholder="Revenue source name"
+						/>
+						<input
+							v-model="forms.amount"
+							type="text"
+							placeholder="Revenue source amount"
+						/>
+						<button @click="add">Add new source of revenue</button>
+					</p>
 				</div>
 				<div class="col-lg-6">
 					<h2>Stats</h2>
@@ -36,6 +49,10 @@ export default {
 		return {
 			toastStore: null,
 			loaded: false,
+			forms: {
+				name: null,
+				amount: null
+			},
 			data: undefined
 		};
 	},
@@ -48,7 +65,10 @@ export default {
 			return "/budget/" + this.budget;
 		},
 		totals() {
-			let monthly = this.data.reduce((acc, cur) => acc + cur, 0);
+			let monthly = Object.values(this.data).reduce(
+				(acc, cur) => acc + cur.amount,
+				0
+			);
 			let yearly = monthly * 12;
 			let daily = yearly / 365;
 			let weekly = daily * 7;
@@ -72,6 +92,44 @@ export default {
 			}
 
 			this.loaded = true;
+		},
+		add() {
+			let name = this.forms.name;
+			let amount = Number(this.forms.amount);
+
+			if (!name) {
+				this.toastStore.warning(
+					"Please choose a name for this source of revenue"
+				);
+				return;
+			}
+
+			if (this.data[name]) {
+				this.toastStore.warning(
+					"Please choose a unique name for this source of revenue"
+				);
+				return;
+			}
+
+			if (
+				Number.isNaN(amount) ||
+				!amount ||
+				amount == Infinity ||
+				amount == -Infinity
+			) {
+				this.toastStore.warning(
+					"Please choose valid amount for this source of revenue"
+				);
+				return;
+			}
+
+			this.data[name] = {
+				name,
+				amount
+			};
+
+			this.forms.name = null;
+			this.forms.amount = null;
 		}
 	}
 };
