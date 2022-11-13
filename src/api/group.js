@@ -1,101 +1,28 @@
-import axios from "axios";
-import result from "./result";
+import network from "./network";
 
 async function myGroups() {
-	try {
-		let groups = await axios.get("/groups/my");
-		return result.success(groups.data.groups);
-	} catch (err) {
-		if (err.response && err.response.status == 401) {
-			return result.failure("Could not authenticate with the server.");
-		} else {
-			console.error(err);
-			return result.failure(
-				"Something went wrong while communicating with the server."
-			);
-		}
-	}
+	return await network.get("/groups/my");
 }
 
 async function create() {
-	try {
-		let groups = await axios.post("/groups/create");
-		return result.success(groups.data.group);
-	} catch (err) {
-		if (err.response && err.response.status == 401) {
-			return result.failure("Could not authenticate with the server.");
-		} else {
-			console.error(err);
-			return result.failure(
-				"Something went wrong while communicating with the server."
-			);
-		}
-	}
+	return await network.get("/groups/create");
 }
 
 async function getGroup(group) {
-	try {
-		let groupData = await axios.get("/groups/" + group + "/info");
-		return result.success(groupData.data.group);
-	} catch (err) {
-		if (err.response && err.response.status == 401) {
-			return result.failure("Could not authenticate with the server.");
-		} else if (err.response && err.response.status == 403) {
-			return result.failure(
-				"You do not have access to this group, or it doesn't exist."
-			);
-		} else {
-			console.error(err);
-			return result.failure(
-				"Something went wrong while communicating with the server."
-			);
-		}
-	}
+	return await network.get("/groups/" + group + "/info");
 }
 
 async function changeName(group, newName) {
-	try {
-		let endpoint = "/groups/" + group + "/name";
-		let body = {
-			newName
-		};
+	let endpoint = "/groups/" + group + "/name";
+	let body = {
+		newName
+	};
 
-		await axios.post(endpoint, body);
-		return result.success();
-	} catch (err) {
-		if (err.response && err.response.status == 401) {
-			return result.failure("Could not authenticate with the server.");
-		} else if (err.response && err.response.status == 403) {
-			return result.failure(
-				"You do not have access to this group, or it doesn't exist."
-			);
-		} else {
-			console.error(err);
-			return result.failure(
-				"Something went wrong while communicating with the server."
-			);
-		}
-	}
+	return await network.post(endpoint, body);
 }
 
 async function deleteGroup(group) {
-	try {
-		await axios.delete("/groups/" + group);
-		return result.success();
-	} catch (err) {
-		if (err.response && err.response.status == 401) {
-			return result.failure("Could not authenticate with the server.");
-		} else if (err.response && err.response.status == 403) {
-			return result.failure(
-				"You do not have access to this group, or it doesn't exist."
-			);
-		} else {
-			console.error(err);
-			return result.failure(
-				"Something went wrong while communicating with the server."
-			);
-		}
-	}
+	return await network.delete("/groups/" + group);
 }
 
 export default {
