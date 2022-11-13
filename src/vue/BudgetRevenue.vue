@@ -23,6 +23,7 @@
 
 					<p v-for="source in rearranged" :key="source.name">
 						{{ source.name }}: {{ source.amount }}
+						<button @click="deleteSource(source)">Delete</button>
 					</p>
 				</div>
 				<div class="col-lg-6">
@@ -139,6 +140,9 @@ export default {
 
 			this.forms.name = null;
 			this.forms.amount = null;
+		},
+		async deleteSource(source) {
+			delete this.data[source.name];
 		},
 		async save() {
 			// TODO: send to server and store it
