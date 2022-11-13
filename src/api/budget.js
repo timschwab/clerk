@@ -68,8 +68,31 @@ async function info(budgetId) {
 	}
 }
 
+async function saveRevenue(budgetId, revenue) {
+	try {
+		await axios.post("/budget/" + budgetId + "/revenue", revenue);
+		return result.success();
+	} catch (err) {
+		if (err.response && err.response.status == 401) {
+			return result.failure("Could not authenticate with the server.");
+		} else if (err.response && err.response.status == 403) {
+			return result.failure(
+				"You do not have authorization to do that, FRIEND."
+			);
+		} else if (err.response && err.response.status == 404) {
+			return result.failure("That endpoint doesn't exist, my dude.");
+		} else {
+			console.error(err);
+			return result.failure(
+				"Something went wrong while communicating with the server."
+			);
+		}
+	}
+}
+
 export default {
 	fromGroup,
 	create,
-	info
+	info,
+	saveRevenue
 };

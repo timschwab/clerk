@@ -140,12 +140,21 @@ export default {
 
 			this.forms.name = null;
 			this.forms.amount = null;
+
+			await this.save();
 		},
 		async deleteSource(source) {
 			delete this.data[source.name];
+			await this.save();
 		},
 		async save() {
-			// TODO: send to server and store it
+			let budgetData = await budgetApi.saveRevenue(this.budget, this.data);
+
+			if (budgetData.success) {
+				// Do nothing
+			} else {
+				this.toastStore.error(budgetData.message);
+			}
 		}
 	}
 };
