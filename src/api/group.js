@@ -5,7 +5,7 @@ async function myGroups() {
 }
 
 async function create() {
-	return await network.get("/groups/create");
+	return await network.post("/groups/create");
 }
 
 async function getGroup(group) {
