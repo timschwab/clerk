@@ -16,6 +16,7 @@ import GroupBudget from "./GroupBudget.vue";
 
 import BudgetHome from "./BudgetHome.vue";
 import BudgetRevenue from "./BudgetRevenue.vue";
+import BudgetExpenses from "./BudgetExpenses.vue";
 
 // Base pages
 const router = createRouter({
@@ -83,6 +84,13 @@ const router = createRouter({
 			path: "/budget/:budget/revenue",
 			name: "budgetRevenue",
 			component: BudgetRevenue,
+			props: true,
+			meta: { auth: "required" }
+		},
+		{
+			path: "/budget/:budget/expenses",
+			name: "budgetExpenses",
+			component: BudgetExpenses,
 			props: true,
 			meta: { auth: "required" }
 		},

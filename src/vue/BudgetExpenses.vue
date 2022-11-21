@@ -1,13 +1,11 @@
 <template>
 	<div>
-		<div v-if="loaded">
-			<router-link :to="backLink" class="btn btn-primary"
-				>Back to group</router-link
-			>
+		<router-link :to="backLink" class="btn btn-primary">
+			Back to budget
+		</router-link>
 
-			<h1>Budget</h1>
-			<p><router-link :to="revenueLink">Revenue</router-link></p>
-			<p><router-link :to="expensesLink">Expenses</router-link></p>
+		<div v-if="loaded">
+			<h1>Monthly Expenses</h1>
 		</div>
 		<div v-else>
 			<p>Loading...</p>
@@ -18,6 +16,7 @@
 <script>
 import useToast from "./stores/toast";
 import budgetApi from "../api/budget";
+import utils from "../utils";
 
 export default {
 	props: ["budget"],
@@ -34,13 +33,7 @@ export default {
 	},
 	computed: {
 		backLink() {
-			return "/group/" + this.data.group;
-		},
-		revenueLink() {
-			return "/budget/" + this.budget + "/revenue";
-		},
-		expensesLink() {
-			return "/budget/" + this.budget + "/expenses";
+			return "/budget/" + this.budget;
 		}
 	},
 	methods: {
@@ -48,7 +41,7 @@ export default {
 			let budgetData = await budgetApi.info(this.budget);
 
 			if (budgetData.success) {
-				this.data = budgetData.return;
+				this.data = budgetData.return.revenue;
 			} else {
 				this.toastStore.error(budgetData.message);
 			}

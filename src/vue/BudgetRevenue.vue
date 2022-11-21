@@ -1,8 +1,8 @@
 <template>
 	<div>
-		<router-link :to="backLink" class="btn btn-primary"
-			>Back to budget</router-link
-		>
+		<router-link :to="backLink" class="btn btn-primary">
+			Back to budget
+		</router-link>
 
 		<div v-if="loaded">
 			<h1>Monthly Revenue</h1>
