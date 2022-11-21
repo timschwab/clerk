@@ -17,10 +17,11 @@ async function saveExpenses(budgetId, expenses) {
 }
 
 async function saveSpendingMoney(budgetId, spendingMoney) {
-	return await network.post(
-		"/budget/" + budgetId + "/spendingMoney",
+	const endpoint = "/budget/" + budgetId + "/spendingMoney";
+	let payload = {
 		spendingMoney
-	);
+	};
+	return await network.post(endpoint, payload);
 }
 
 export default {

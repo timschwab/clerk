@@ -56,21 +56,24 @@
 			<p>Expenses total: {{ rearranged.totalString }}</p>
 			<p>Spending money: {{ spendingMoneyString }}</p>
 			<p>Padding: {{ padding }}</p>
+
+			<hr />
+
 			<ul>
 				<li v-for="clump in rearranged.clumps" :key="clump.name">
-					{{ clump.name }}: {{ clump.totalString }}
 					<button @click="deleteClump(clump.name)" class="btn btn-danger">
 						Delete
 					</button>
+					{{ clump.name }}: {{ clump.totalString }}
 					<ul>
 						<li v-for="expense in clump.expenses" :key="expense.name">
-							{{ expense.name }}: {{ expense.amountString }}
 							<button
 								@click="deleteExpense(clump.name, expense.name)"
 								class="btn btn-danger"
 							>
 								Delete
 							</button>
+							{{ expense.name }}: {{ expense.amountString }}
 						</li>
 					</ul>
 				</li>
@@ -263,6 +266,7 @@ export default {
 			}
 
 			this.data.spendingMoney = amount;
+			this.forms.spendingMoney.amount = null;
 
 			await this.saveSpendingMoney();
 		},

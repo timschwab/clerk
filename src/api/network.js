@@ -5,6 +5,9 @@ import result from "./result";
 async function request(method, endpoint, body) {
 	let config = {
 		method,
+		headers: {
+			"Content-Type": "application/json"
+		},
 		url: endpoint,
 		data: body
 	};
