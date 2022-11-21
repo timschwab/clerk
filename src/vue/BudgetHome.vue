@@ -61,7 +61,6 @@ export default {
 		},
 		expensesTotal() {
 			let val = 0;
-			console.log(this.data.expenses);
 			for (let clump of Object.values(this.data.expenses)) {
 				for (let expense of Object.values(clump)) {
 					val += expense;
