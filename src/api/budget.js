@@ -12,8 +12,21 @@ async function saveRevenue(budgetId, revenue) {
 	return await network.post("/budget/" + budgetId + "/revenue", revenue);
 }
 
+async function saveExpenses(budgetId, expenses) {
+	return await network.post("/budget/" + budgetId + "/expenses", expenses);
+}
+
+async function saveSpendingMoney(budgetId, spendingMoney) {
+	return await network.post(
+		"/budget/" + budgetId + "/spendingMoney",
+		spendingMoney
+	);
+}
+
 export default {
 	fromGroup,
 	info,
-	saveRevenue
+	saveRevenue,
+	saveExpenses,
+	saveSpendingMoney
 };

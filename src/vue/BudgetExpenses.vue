@@ -211,6 +211,7 @@ export default {
 				this.toastStore.warning("This clump is not empty");
 			} else {
 				delete this.data.expenses[clump];
+				await this.save();
 			}
 		},
 		async addExpense() {
@@ -249,6 +250,7 @@ export default {
 		},
 		async deleteExpense(clump, expense) {
 			delete this.data.expenses[clump][expense];
+			await this.save();
 		},
 		async setSpendingMoney() {
 			let amount = this.forms.spendingMoney.amount;
@@ -262,11 +264,25 @@ export default {
 
 			this.data.spendingMoney = amount;
 
-			await this.save();
+			await this.saveSpendingMoney();
 		},
 		async save() {
-			//let budgetData = await budgetApi.saveExpenses(this.budget, this.data.expenses);
-			let budgetData = { success: true };
+			let budgetData = await budgetApi.saveExpenses(
+				this.budget,
+				this.data.expenses
+			);
+
+			if (budgetData.success) {
+				this.toastStore.info("Saved");
+			} else {
+				this.toastStore.error(budgetData.message);
+			}
+		},
+		async saveSpendingMoney() {
+			let budgetData = await budgetApi.saveSpendingMoney(
+				this.budget,
+				this.data.spendingMoney
+			);
 
 			if (budgetData.success) {
 				this.toastStore.info("Saved");
