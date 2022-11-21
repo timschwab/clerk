@@ -17,7 +17,7 @@
 						/>
 						<input
 							v-model="forms.amount"
-							type="text"
+							type="number"
 							placeholder="Revenue source amount"
 						/>
 						<button @click="add" class="btn btn-primary">
@@ -130,12 +130,7 @@ export default {
 				return;
 			}
 
-			if (
-				Number.isNaN(amount) ||
-				!amount ||
-				amount == Infinity ||
-				amount == -Infinity
-			) {
+			if (!utils.validNumber(amount)) {
 				this.toastStore.warning(
 					"Please choose valid amount for this source of revenue"
 				);
@@ -157,7 +152,7 @@ export default {
 			let budgetData = await budgetApi.saveRevenue(this.budget, this.data);
 
 			if (budgetData.success) {
-				// Do nothing
+				this.toastStore.info("Saved");
 			} else {
 				this.toastStore.error(budgetData.message);
 			}
