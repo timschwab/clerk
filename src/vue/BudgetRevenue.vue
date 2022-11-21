@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<router-link :to="backLink">Back to budget</router-link>
+		<router-link :to="backLink" class="btn btn-primary"
+			>Back to budget</router-link
+		>
 
 		<div v-if="loaded">
 			<h1>Monthly Revenue</h1>
@@ -18,12 +20,16 @@
 							type="text"
 							placeholder="Revenue source amount"
 						/>
-						<button @click="add">Add new source of revenue</button>
+						<button @click="add" class="btn btn-primary">
+							Add new source of revenue
+						</button>
 					</p>
 
 					<p v-for="source in rearranged" :key="source.name">
 						{{ source.name }}: {{ source.amount }}
-						<button @click="deleteSource(source)">Delete</button>
+						<button @click="deleteSource(source)" class="btn btn-danger">
+							Delete
+						</button>
 					</p>
 				</div>
 				<div class="col-lg-6">

@@ -5,10 +5,14 @@
 		<p>Your username: {{ info.username }}</p>
 		<hr />
 		<input v-model="newUsername" type="text" placeholder="New username" />
-		<button @click="changeUsername">Change username</button>
+		<button @click="changeUsername" class="btn btn-primary">
+			Change username
+		</button>
 		<br />
 		<input v-model="newPassword" type="password" placeholder="New password" />
-		<button @click="changePassword">Change password</button>
+		<button @click="changePassword" class="btn btn-primary">
+			Change password
+		</button>
 	</div>
 </template>
 
@@ -22,7 +26,7 @@ export default {
 			info: {},
 			newUsername: undefined,
 			newPassword: undefined,
-			toastStore: undefined,
+			toastStore: undefined
 		};
 	},
 	created() {
@@ -55,8 +59,8 @@ export default {
 			} else {
 				this.toastStore.error(result.message);
 			}
-		},
-	},
+		}
+	}
 };
 </script>
 

@@ -2,7 +2,9 @@
 	<div>
 		<h1>It's your groups</h1>
 		<p>You are a member of {{ groups.length }} groups.</p>
-		<button @click="createGroup">Create a new group</button>
+		<button @click="createGroup" class="btn btn-primary">
+			Create a new group
+		</button>
 
 		<div>
 			<div

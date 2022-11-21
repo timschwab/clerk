@@ -1,7 +1,9 @@
 <template>
 	<div>
 		<div v-if="loaded">
-			<router-link :to="backLink">Back to group</router-link>
+			<router-link :to="backLink" class="btn btn-primary"
+				>Back to group</router-link
+			>
 
 			<h1>Budget</h1>
 			<p><router-link :to="revenueLink">Revenue</router-link></p>

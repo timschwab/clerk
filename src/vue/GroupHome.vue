@@ -1,6 +1,8 @@
 <template>
 	<div>
-		<router-link to="/my-groups">Back to groups</router-link>
+		<router-link to="/my-groups" class="btn btn-primary"
+			>Back to groups</router-link
+		>
 
 		<div v-if="loaded">
 			<h1>{{ data.name }}</h1>

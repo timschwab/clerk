@@ -8,10 +8,14 @@
 			<div v-if="admin">
 				<p>
 					<input v-model="newName" type="text" placeholder="New group name" />
-					<button @click="changeName">Change group name</button>
+					<button @click="changeName" class="btn btn-primary">
+						Change group name
+					</button>
 				</p>
 				<p>
-					<button @click="deleteGroup">Delete group</button>
+					<button @click="deleteGroup" class="btn btn-danger">
+						Delete group
+					</button>
 				</p>
 			</div>
 		</div>
