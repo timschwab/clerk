@@ -59,9 +59,18 @@
 			<ul>
 				<li v-for="clump in rearranged.clumps" :key="clump.name">
 					{{ clump.name }}: {{ clump.totalString }}
+					<button @click="deleteClump(clump.name)" class="btn btn-danger">
+						Delete
+					</button>
 					<ul>
 						<li v-for="expense in clump.expenses" :key="expense.name">
 							{{ expense.name }}: {{ expense.amountString }}
+							<button
+								@click="deleteExpense(clump.name, expense.name)"
+								class="btn btn-danger"
+							>
+								Delete
+							</button>
 						</li>
 					</ul>
 				</li>
@@ -197,6 +206,13 @@ export default {
 
 			await this.save();
 		},
+		async deleteClump(clump) {
+			if (Object.keys(this.data.expenses[clump]).length) {
+				this.toastStore.warning("This clump is not empty");
+			} else {
+				delete this.data.expenses[clump];
+			}
+		},
 		async addExpense() {
 			let clump = this.forms.expense.clump;
 			let name = this.forms.expense.name;
@@ -230,6 +246,9 @@ export default {
 			this.forms.expense.amount = null;
 
 			await this.save();
+		},
+		async deleteExpense(clump, expense) {
+			delete this.data.expenses[clump][expense];
 		},
 		async setSpendingMoney() {
 			let amount = this.forms.spendingMoney.amount;
